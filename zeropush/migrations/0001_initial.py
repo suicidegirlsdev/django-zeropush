@@ -40,6 +40,13 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
+        u'following.follow': {
+            'Meta': {'unique_together': "(('follower', 'followee'),)", 'object_name': 'Follow'},
+            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
+            'followee': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'follows_for'", 'to': u"orm['sgauth.User']"}),
+            'follower': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'follows_by'", 'to': u"orm['sgauth.User']"}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
+        },
         u'sgauth.user': {
             'Meta': {'ordering': "['username']", 'object_name': 'User'},
             'anonymous': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
