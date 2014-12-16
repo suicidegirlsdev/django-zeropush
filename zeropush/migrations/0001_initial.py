@@ -19,7 +19,7 @@ class Migration(SchemaMigration):
         # Deleting model 'InstagramProfile'
         db.delete_table(u'pushdevice')
 
-    models {
+    models = {
         u'sgauth.user': {
             'Meta': {'ordering': "['username']", 'object_name': 'User'},
             'anonymous': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
