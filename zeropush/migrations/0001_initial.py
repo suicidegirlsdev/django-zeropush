@@ -10,6 +10,7 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         # Adding model 'InstagramProfile'
         db.create_table(u'zeropush_pushdevice', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['sgauth.User'])),
             ('token', self.gf('django.db.models.fields.CharField')(max_length=255, db_index=True)),
         ))
