@@ -9,7 +9,8 @@ ZEROPUSH_NOTIFY_URL = "https://api.zeropush.com/notify"
 
 log = logging.getLogger(__name__)
 
-def notify_devices(devices, alert=None, sound=None, badge_number=None):
+
+def notify_devices(devices, alert=None, sound=None, badge_number=None, info=None):
     if len(devices) > 0:
         params = {
             "auth_token": settings.ZEROPUSH_AUTH_TOKEN,
@@ -21,6 +22,8 @@ def notify_devices(devices, alert=None, sound=None, badge_number=None):
             params.update({ "sound": sound })
         if badge_number is not None:
             params.update({ "badge": badge_number })
+        if info is not None:
+            params.update({"info": info})
 
         response = requests.post(ZEROPUSH_NOTIFY_URL, params)
         if response.ok:
@@ -32,5 +35,6 @@ def notify_devices(devices, alert=None, sound=None, badge_number=None):
 
     return False
 
-def notify_user(user, alert=None, sound=None, badge_number=None):
-    return notify_devices(user.pushdevice_set.all(), alert=alert, sound=sound, badge_number=badge_number)
+
+def notify_user(user, alert=None, sound=None, badge_number=None, info=None):
+    return notify_devices(user.pushdevice_set.all(), alert=alert, sound=sound, badge_number=badge_number, info=info)
